@@ -33,8 +33,8 @@ const Single = ({
   })
 
   return (
-    <div className="h-screen snap-center m-auto flex flex-col lg:flex-row items-center gap-10">
-      <div className="lg:flex-1 flex items-center max-h-80 w-full lg:w-[650px] lg:h-1/2 pt-20 sm:pt-60 md:pt-80 lg:p-0" ref={ref}>
+    <div className="min-h-screen snap-center m-auto flex flex-col lg:flex-row items-center gap-10">
+      <div className="lg:flex-1 flex items-center max-h-80 w-full lg:w-[650px] lg:h-1/2 pt-14 lg:p-0" ref={ref}>
         <AspectRatio ratio={16 / 9} className="relative">
           <Image 
             src={projectImage.url} 
@@ -43,8 +43,8 @@ const Single = ({
             fill
             className="object-contain" 
           />
-          {!release && <span className=" absolute top-0 left-0 bg-destructive rounded p-[5px] text-[10px] xs:text-xs font-bold">In Development</span>}
-          {isFav && <span className=" absolute top-0 left-0 bg-muted rounded p-[5px] text-[10px] xs:text-xs font-bold">Favourite</span>}
+          {!release && <span className="absolute top-2 left-2 bg-destructive rounded p-1 text-[10px] xs:text-xs font-bold">In Devlopment</span>}
+          {isFav && <span className="absolute top-2 left-2 bg-muted rounded p-1 text-[10px] xs:text-xs font-bold">Favorite</span>}
         </AspectRatio>
       </div>
       <motion.div 
@@ -56,14 +56,14 @@ const Single = ({
               : size.width <= 850 
                 ? [200, 600]
                 : size.width <= 1023 
-                  ?  [250, 600]
+                  ? [250, 600]
                   : [-300, 300]
             )
           }} 
         >
-        <h2 className="text-2xl min-[400px]:text-3xl xl:text-5xl text-[color:var(--primary)] font-semibold">{title}</h2>
-        <p className=" text-sm md:text-lg max-w-xl font-light text-muted-foreground">{description}</p>
-        <h3 className=" text-muted-foreground text-xs xs:text-sm">Date:&nbsp;
+        <h2 className="text-2xl xs:text-3xl xl:text-5xl text-[color:var(--primary)] font-semibold">{title}</h2>
+        <p className="text-[10px] xs:text-sm max-w-xl text-muted-foreground">{description}</p>
+        <h3 className="text-muted-foreground text-[11px] xs:text-sm">Date:&nbsp;
           <span className="text-primary">
             {release ? `${date}` : `Project will be finished on ${date}`}
           </span>
@@ -71,11 +71,15 @@ const Single = ({
         {release ? (
           <div className="flex gap-4">
             <Link href={projectLink} target="_blank">
-              <Button size="sm">Live Demo</Button>
+              <Button 
+                size={size.width < 300 ? "xs" : "sm"} 
+              >
+                Live Demo
+              </Button>
             </Link>
             <Link href={projectCode} target="_blank">
               <Button 
-                size="sm" 
+                size={size.width < 300 ? "xs" : "sm"} 
                 variant="secondary"
                 className="flex gap-2"
               >
@@ -86,7 +90,12 @@ const Single = ({
           </div>
         ) : (
           <div>
-            <Button size="sm" disabled>Coming Soon...</Button>
+            <Button 
+              size={size.width < 300 ? "xs" : "sm"}  
+              disabled
+            >
+              Coming Soon...
+            </Button>
           </div>
         )}
       </motion.div>
